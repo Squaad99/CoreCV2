@@ -1,8 +1,6 @@
 package com.CoreCV.model;
 
 import com.CoreCV.entity.Skill;
-import com.CoreCV.entity.Title;
-import org.springframework.stereotype.Component;
 
 
 public class SkillModel {

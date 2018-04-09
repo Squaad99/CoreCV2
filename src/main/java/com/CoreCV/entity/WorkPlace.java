@@ -27,7 +27,8 @@ public class WorkPlace {
     @JoinColumn(name = "cv_id", referencedColumnName = "cv_id")
     private Cv cv;
 
-    public WorkPlace(String name, int start, int end, String comment, Cv cv) {
+    public
+    WorkPlace(String name, int start, int end, String comment, Cv cv) {
         this.name = name;
         this.start = start;
         this.end = end;

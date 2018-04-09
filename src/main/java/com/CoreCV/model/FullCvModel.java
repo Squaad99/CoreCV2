@@ -1,39 +1,41 @@
 package com.CoreCV.model;
 
-import com.CoreCV.entity.SkillCv;
+import com.CoreCV.entity.Cv;
 
 import java.util.List;
 
 public class FullCvModel {
 
     private Long id;
-    private String fullName;
+    private String firstName;
+    private String lastName;
     private int birthYear;
     private String email;
     private String cvAddress;
-    private String country;
+    private String cvCountry;
     private String city;
     private String zipCode;
     private String phone;
-    private String picturePath;
+    private String imageBase64;
     private String title;
     private String comment;
 
     private List<EducationModel> educationList;
     private List<WorkplaceModel> workPlaceList;
-    private List<SkillCv> fullSkillList;
+    private List<SkillCvModel> fullSkillList;
 
-    public FullCvModel(Long id, String fullName, int birthYear, String email, String cvAddress, String country, String city, String zipCode, String phone, String picturePath, String title, String comment, List<EducationModel> educationList, List<WorkplaceModel> workPlaceList, List<SkillCv> fullSkillList) {
+    public FullCvModel(Long id, String firstName, String lastName, int birthYear, String email, String cvAddress, String cvCountry, String city, String zipCode, String phone, String imageBase64, String title, String comment, List<EducationModel> educationList, List<WorkplaceModel> workPlaceList, List<SkillCvModel> fullSkillList) {
         this.id = id;
-        this.fullName = fullName;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.birthYear = birthYear;
         this.email = email;
         this.cvAddress = cvAddress;
-        this.country = country;
+        this.cvCountry = cvCountry;
         this.city = city;
         this.zipCode = zipCode;
         this.phone = phone;
-        this.picturePath = picturePath;
+        this.imageBase64 = imageBase64;
         this.title = title;
         this.comment = comment;
         this.educationList = educationList;
@@ -41,8 +43,23 @@ public class FullCvModel {
         this.fullSkillList = fullSkillList;
     }
 
-    public FullCvModel() {
+    public FullCvModel(FullCvModel fullCvModel) {
+        this.id = fullCvModel.getId();
+        this.firstName = fullCvModel.getFirstName();
+        this.lastName = fullCvModel.getLastName();
+        this.birthYear = fullCvModel.getBirthYear();
+        this.email = fullCvModel.getEmail();
+        this.cvAddress = fullCvModel.getCvAddress();
+        this.cvCountry = fullCvModel.getCvCountry();
+        this.city = fullCvModel.getCity();
+        this.zipCode = fullCvModel.getZipCode();
+        this.phone = fullCvModel.getPhone();
+        this.imageBase64 = fullCvModel.getImageBase64();
+        this.title = fullCvModel.getTitle();
+        this.comment = fullCvModel.getComment();
     }
+
+    public FullCvModel() {}
 
     public Long getId() {
         return id;
@@ -52,12 +69,20 @@ public class FullCvModel {
         this.id = id;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public int getBirthYear() {
@@ -84,12 +109,12 @@ public class FullCvModel {
         this.cvAddress = cvAddress;
     }
 
-    public String getCountry() {
-        return country;
+    public String getCvCountry() {
+        return cvCountry;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setCvCountry(String cvCountry) {
+        this.cvCountry = cvCountry;
     }
 
     public String getCity() {
@@ -116,12 +141,12 @@ public class FullCvModel {
         this.phone = phone;
     }
 
-    public String getPicturePath() {
-        return picturePath;
+    public String getImageBase64() {
+        return imageBase64;
     }
 
-    public void setPicturePath(String picturePath) {
-        this.picturePath = picturePath;
+    public void setImageBase64(String imageBase64) {
+        this.imageBase64 = imageBase64;
     }
 
     public String getTitle() {
@@ -156,11 +181,11 @@ public class FullCvModel {
         this.workPlaceList = workPlaceList;
     }
 
-    public List<SkillCv> getFullSkillList() {
+    public List<SkillCvModel> getFullSkillList() {
         return fullSkillList;
     }
 
-    public void setFullSkillList(List<SkillCv> fullSkillList) {
+    public void setFullSkillList(List<SkillCvModel> fullSkillList) {
         this.fullSkillList = fullSkillList;
     }
 }

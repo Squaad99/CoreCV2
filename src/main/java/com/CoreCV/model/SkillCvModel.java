@@ -1,5 +1,7 @@
 package com.CoreCV.model;
 
+import com.CoreCV.entity.SkillCv;
+
 public class SkillCvModel {
 
     private Long id;
@@ -18,6 +20,14 @@ public class SkillCvModel {
         this.exp1 = exp1;
         this.exp2 = exp2;
         this.exp3 = exp3;
+    }
+
+    public SkillCvModel(SkillCv skillCv) {
+        this.id = skillCv.getId();
+        this.name = skillCv.getName();
+        this.exp1 = skillCv.getExp1();
+        this.exp2 = skillCv.getExp2();
+        this.exp3 = skillCv.getExp3();
     }
 
     public SkillCvModel() {}

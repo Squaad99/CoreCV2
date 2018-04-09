@@ -1,6 +1,9 @@
 package com.CoreCV.model;
 
 
+import com.CoreCV.entity.Cv;
+import com.CoreCV.entity.WorkPlace;
+
 public class WorkplaceModel {
 
     private Long id;
@@ -8,13 +11,25 @@ public class WorkplaceModel {
     private int start;
     private int end;
     private String comment;
+    private Cv cv;
 
-    public WorkplaceModel(Long id, String name, int start, int end, String comment) {
+
+    public WorkplaceModel(Long id, String name, int start, int end, String comment, Cv cv) {
         this.id = id;
         this.name = name;
         this.start = start;
         this.end = end;
         this.comment = comment;
+        this.cv = cv;
+    }
+
+    public WorkplaceModel(WorkPlace workPlace) {
+        this.id = workPlace.getId();
+        this.name = workPlace.getName();
+        this.start = workPlace.getStart();
+        this.end = workPlace.getEnd();
+        this.comment = workPlace.getComment();
+        this.cv = workPlace.getCv();
     }
 
     public WorkplaceModel() {}
@@ -57,5 +72,13 @@ public class WorkplaceModel {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public Cv getCv() {
+        return cv;
+    }
+
+    public void setCv(Cv cv) {
+        this.cv = cv;
     }
 }

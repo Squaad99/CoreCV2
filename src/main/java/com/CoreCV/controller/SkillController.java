@@ -23,8 +23,8 @@ public class SkillController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<SkillModel> insertSkill(@RequestBody SkillModel skillModel){
-        SkillModel createdUser =  skillService.insertSkill(skillModel);
-        return new ResponseEntity<>(createdUser, HttpStatus.OK);
+        SkillModel createdSkill =  skillService.insertSkill(skillModel);
+        return new ResponseEntity<>(createdSkill, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET)

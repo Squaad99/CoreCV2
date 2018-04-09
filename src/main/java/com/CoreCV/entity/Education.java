@@ -11,6 +11,9 @@ public class Education {
     @Column(name = "education_id")
     private Long id;
 
+    @Column(name = "name")
+    private String name;
+
     @Column(name = "start")
     private int start;
 
@@ -24,7 +27,8 @@ public class Education {
     @JoinColumn(name = "cv_id", referencedColumnName = "cv_id")
     private Cv cv;
 
-    public Education(int start, int end, String comment, Cv cv) {
+    public Education(String name, int start, int end, String comment, Cv cv) {
+        this.name = name;
         this.start = start;
         this.end = end;
         this.comment = comment;
@@ -39,6 +43,14 @@ public class Education {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getStart() {

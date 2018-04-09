@@ -1,7 +1,10 @@
 package com.CoreCV.entity;
 
+import com.CoreCV.model.FullCvModel;
+
 import javax.persistence.*;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 @Entity
@@ -23,10 +26,10 @@ public class Cv {
     private String email;
 
     @Column(name = "address")
-    private String address;
+    private String cvAddress;
 
     @Column(name = "country")
-    private String country;
+    private String cvCountry;
 
     @Column(name = "city")
     private String city;
@@ -37,8 +40,9 @@ public class Cv {
     @Column(name = "phone")
     private String phone;
 
+    @Lob
     @Column(name = "picturePath")
-    private String picturePath;
+    private byte[] picturePath;
 
     @Column(name = "title")
     private String title;
@@ -46,21 +50,43 @@ public class Cv {
     @Column(name = "comment")
     private String comment;
 
-    public Cv(String fullName, int birthYear, String email, String address, String country, String city, String zipCode, String phone, String picturePath, String title, String comment) {
+    @Column(name = "posted")
+    private Date posted;
+
+    public Cv(String fullName, int birthYear, String email, String cvAddress, String cvCountry, String city, String zipCode, String phone, byte[] picturePath, String title, String comment, Date posted) {
         this.fullName = fullName;
         this.birthYear = birthYear;
         this.email = email;
-        this.address = address;
-        this.country = country;
+        this.cvAddress = cvAddress;
+        this.cvCountry = cvCountry;
         this.city = city;
         this.zipCode = zipCode;
         this.phone = phone;
         this.picturePath = picturePath;
         this.title = title;
         this.comment = comment;
+        this.posted = posted;
     }
 
-    public Cv(){}
+    public Cv(FullCvModel fullCvModel){
+        this.fullName = fullCvModel.getFirstName() + " " + fullCvModel.getLastName();
+        this.birthYear = fullCvModel.getBirthYear();
+        this.email = fullCvModel.getEmail();
+        this.cvAddress = fullCvModel.getCvAddress();
+        this.cvCountry = fullCvModel.getCvCountry();
+        this.city = fullCvModel.getCity();
+        this.zipCode = fullCvModel.getZipCode();
+        this.phone = fullCvModel.getPhone();
+        byte[] imageBytes = fullCvModel.getImageBase64().getBytes();
+        this.picturePath = imageBytes;
+        this.title = fullCvModel.getTitle();
+        this.comment = fullCvModel.getComment();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String out = df.format(new Date());
+        this.posted = new Date();
+    }
+
+    public Cv() {}
 
     public Long getId() {
         return id;
@@ -94,20 +120,20 @@ public class Cv {
         this.email = email;
     }
 
-    public String getAddress() {
-        return address;
+    public String getCvAddress() {
+        return cvAddress;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setCvAddress(String cvAddress) {
+        this.cvAddress = cvAddress;
     }
 
-    public String getCountry() {
-        return country;
+    public String getCvCountry() {
+        return cvCountry;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setCvCountry(String cvCountry) {
+        this.cvCountry = cvCountry;
     }
 
     public String getCity() {
@@ -134,11 +160,11 @@ public class Cv {
         this.phone = phone;
     }
 
-    public String getPicturePath() {
+    public byte[] getPicturePath() {
         return picturePath;
     }
 
-    public void setPicturePath(String picturePath) {
+    public void setPicturePath(byte[] picturePath) {
         this.picturePath = picturePath;
     }
 
@@ -156,5 +182,13 @@ public class Cv {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public Date getPosted() {
+        return posted;
+    }
+
+    public void setPosted(Date posted) {
+        this.posted = posted;
     }
 }
