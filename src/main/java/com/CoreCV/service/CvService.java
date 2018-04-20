@@ -79,11 +79,17 @@ public class CvService {
     }
 
     public Cv updateCv(FullCvViewModel fullCvViewModel) {
-
         Cv cv = cvRepository.findOne(fullCvViewModel.getId());
-
+        cv.setFullName(fullCvViewModel.getFullName());
+        cv.setBirthYear(fullCvViewModel.getBirthYear());
+        cv.setEmail(fullCvViewModel.getEmail());
+        cv.setCvAddress(fullCvViewModel.getCvAddress());
+        cv.setCvCountry(fullCvViewModel.getCvCountry());
+        cv.setCity(fullCvViewModel.getCity());
+        cv.setZipCode(fullCvViewModel.getZipCode());
+        cv.setPhone(fullCvViewModel.getPhone());
+        cv.setTitle(fullCvViewModel.getTitle());
         cv.setComment(fullCvViewModel.getComment());
-
         return cvRepository.save(cv);
     }
 

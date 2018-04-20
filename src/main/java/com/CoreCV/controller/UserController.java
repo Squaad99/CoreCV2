@@ -1,91 +1,48 @@
 package com.CoreCV.controller;
 
-import com.CoreCV.model.User;
+
+import com.CoreCV.entity.User;
+import com.CoreCV.exception.DuplicateUserException;
+import com.CoreCV.model.UserModel;
+import com.CoreCV.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping(value = "/users")
+@RequestMapping("api/users")
 public class UserController {
 
-    private List<User> users = new ArrayList();
+    private final UserService userService;
 
-
-    UserController() {
-        this.users = buildUsers();
-    }
-
-    @RequestMapping(method = RequestMethod.GET)
-    public List<User> getUsers() {
-        return this.users;
-    }
-
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public User getUser(@PathVariable("id") Long id) {
-        return this.users.stream().filter(user -> user.getId() == id).findFirst().orElse(null);
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public User saveUser(@RequestBody User user) {
-        Long nextId = 0L;
-        if (this.users.size() != 0) {
-            User lastUser = this.users.stream().skip(this.users.size() - 1).findFirst().orElse(null);
-            nextId = lastUser.getId() + 1;
-        }
-
-        user.setId(nextId);
-        this.users.add(user);
-        return user;
+    public ResponseEntity<UserModel> register(@RequestBody UserModel userModel) throws DuplicateUserException {
+        UserModel createdUser = userService.registerUser(userModel);
+        return new ResponseEntity<>(createdUser, HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
-    public User updateUser(@RequestBody User user) {
-        User modifiedUser = this.users.stream().filter(u -> u.getId() == user.getId()).findFirst().orElse(null);
-        modifiedUser.setFirstName(user.getFirstName());
-        modifiedUser.setLastName(user.getLastName());
-        modifiedUser.setEmail(user.getEmail());
-        return modifiedUser;
+    @RequestMapping(method = RequestMethod.GET)
+    private ResponseEntity<List<UserModel>> getAllUsers() {
+        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public boolean deleteUser(@PathVariable Long id) {
-        User deleteUser = this.users.stream().filter(user -> user.getId() == id).findFirst().orElse(null);
-        if (deleteUser != null) {
-            this.users.remove(deleteUser);
-            return true;
-        } else  {
-            return false;
-        }
+    @RequestMapping(value = "/{username}/", method = RequestMethod.GET)
+    public ResponseEntity<UserModel> getUserByUsername(@PathVariable("username") String username) {
+        return new ResponseEntity<>(userService.getUserByUsername(username), HttpStatus.OK);
     }
 
-    List<User> buildUsers() {
-        List<User> users = new ArrayList<>();
-
-        User user1 = buildUser(1L, "John", "Doe", "john@email.com");
-        User user2 = buildUser(2L, "Jon", "Smith", "smith@email.com");
-        User user3 = buildUser(3L, "Will", "Craig", "will@email.com");
-        User user4 = buildUser(4L, "Sam", "Lernorad", "sam@email.com");
-        User user5 = buildUser(5L, "Ross", "Doe", "ross@email.com");
-
-        users.add(user1);
-        users.add(user2);
-        users.add(user3);
-        users.add(user4);
-        users.add(user5);
-
-        return users;
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    public ResponseEntity<UserModel> updateUser(@RequestBody UserModel userModel) throws DuplicateUserException {
+        User user = userService.updateUser(userModel);
+        return new ResponseEntity<>(new UserModel(user), HttpStatus.OK);
     }
-
-    User buildUser(Long id, String fname, String lname, String email) {
-        User user = new User();
-        user.setId(id);
-        user.setFirstName(fname);
-        user.setLastName(lname);
-        user.setEmail(email);
-        return user;
-    }
-
 }

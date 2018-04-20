@@ -41,6 +41,13 @@ public class CvController {
         return new ResponseEntity<>(new FullCvViewModel(cvService.updateCv(fullCvViewModel)), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/{cvId}", method = RequestMethod.DELETE)
+    private ResponseEntity deleteCvById(@PathVariable("cvId") Long cvId) {
+
+        cvService.deleteCv(cvId);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
 
 
 }
