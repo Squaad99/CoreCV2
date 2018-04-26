@@ -28,7 +28,6 @@ public class TitleController {
         return new ResponseEntity<>(createdUser, HttpStatus.OK);
     }
 
-
     @RequestMapping(method = RequestMethod.GET)
     private ResponseEntity<List<TitleModel>> getAllTitles() {
         return new ResponseEntity<>(titleService.getAllTitles(), HttpStatus.OK);

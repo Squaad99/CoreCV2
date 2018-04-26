@@ -40,9 +40,10 @@ public class UserController {
         return new ResponseEntity<>(userService.getUserByUsername(username), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public ResponseEntity<UserModel> updateUser(@RequestBody UserModel userModel) throws DuplicateUserException {
-        User user = userService.updateUser(userModel);
-        return new ResponseEntity<>(new UserModel(user), HttpStatus.OK);
+    @RequestMapping("/delete/{userId}")
+    private ResponseEntity deletUser(@PathVariable(value="userId") int userId) {
+        userService.deleteUser(userId);
+        return new ResponseEntity(HttpStatus.OK);
     }
+
 }
