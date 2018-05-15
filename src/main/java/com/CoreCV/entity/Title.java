@@ -14,7 +14,7 @@ public class Title {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", length = 50)
     private String name;
 
     public Title(String name) {

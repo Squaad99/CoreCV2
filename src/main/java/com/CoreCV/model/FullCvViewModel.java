@@ -62,19 +62,7 @@ public class FullCvViewModel {
         this.phone = cv.getPhone();
         this.title = cv.getTitle();
         this.comment = cv.getComment();
-
-        try{
-            if(cv.getPicturePath() != null){
-                String byteString = new String(cv.getPicturePath(), StandardCharsets.UTF_8);
-                this.imageBase64 = byteString;
-            }else {
-                this.imageBase64 = null;
-            }
-        }
-        catch (Exception e){
-            System.out.println(e);
-        }
-
+        this.imageBase64 = null;
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String stringDate = df.format(cv.getPosted());
         this.posted = stringDate;

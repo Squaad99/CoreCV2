@@ -13,7 +13,7 @@ public class SkillCv {
     @Column(name = "skill_cv_id")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", length = 50)
     private String name;
 
     @Column(name = "exp1")

@@ -8,6 +8,7 @@ import com.CoreCV.repository.SkillCvRepository;
 import com.CoreCV.repository.WorkplaceRepository;
 import org.springframework.stereotype.Service;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -93,7 +94,6 @@ public class CvService {
         return cvRepository.save(cv);
     }
 
-
     public Education updateEducation(EducationModel educationModel) {
         Education education = educationRepository.findOne(educationModel.getId());
         education.setName(educationModel.getName());
@@ -116,6 +116,12 @@ public class CvService {
 
     public void deleteCv(Long cvId){
         cvRepository.delete(cvId);
+    }
+
+    public ProfileImage getCvImageBase64(Long id){
+        Cv cv = cvRepository.getOne(id);
+        ProfileImage profileImage = new ProfileImage(cv);
+        return profileImage;
     }
 
 }

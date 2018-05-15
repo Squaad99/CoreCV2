@@ -3,6 +3,7 @@ package com.CoreCV.controller;
 
 import com.CoreCV.model.FullCvModel;
 import com.CoreCV.model.FullCvViewModel;
+import com.CoreCV.model.ProfileImage;
 import com.CoreCV.model.SkillModel;
 import com.CoreCV.service.CvService;
 import com.CoreCV.service.SkillCvService;
@@ -36,6 +37,18 @@ public class CvController {
         return new ResponseEntity<>(cvService.getAllCvs(), HttpStatus.OK);
     }
 
+
+
+
+    @RequestMapping(value = "/cvImage/{cvId}", method = RequestMethod.GET)
+    private ResponseEntity<ProfileImage> getCvImageById(@PathVariable("cvId") Long cvId) {
+        return new ResponseEntity<>(cvService.getCvImageBase64(cvId), HttpStatus.OK);
+    }
+
+
+
+
+
     @RequestMapping(method = RequestMethod.PUT)
     private ResponseEntity<FullCvViewModel> updateEducation(@RequestBody FullCvViewModel fullCvViewModel) {
         return new ResponseEntity<>(new FullCvViewModel(cvService.updateCv(fullCvViewModel)), HttpStatus.OK);
@@ -43,7 +56,6 @@ public class CvController {
 
     @RequestMapping(value = "/{cvId}", method = RequestMethod.DELETE)
     private ResponseEntity deleteCvById(@PathVariable("cvId") Long cvId) {
-
         cvService.deleteCv(cvId);
         return new ResponseEntity(HttpStatus.OK);
     }

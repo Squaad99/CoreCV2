@@ -15,7 +15,7 @@ public class Skill {
     @Column(name = "skill_id")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", length = 50)
     private String name;
 
     @Column(name = "type")

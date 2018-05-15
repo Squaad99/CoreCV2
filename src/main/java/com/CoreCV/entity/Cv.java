@@ -13,41 +13,42 @@ public class Cv {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Column(name = "cv_id")
     private Long id;
 
-    @Column(name = "fullName")
+    @Column(name = "fullName", length = 50)
     private String fullName;
 
     @Column(name = "birthYear")
     private int birthYear;
 
-    @Column(name = "email")
+    @Column(name = "email", length = 60)
     private String email;
 
-    @Column(name = "address")
+    @Column(name = "address", length = 50)
     private String cvAddress;
 
-    @Column(name = "country")
+    @Column(name = "country", length = 50)
     private String cvCountry;
 
-    @Column(name = "city")
+    @Column(name = "city", length = 50)
     private String city;
 
-    @Column(name = "zipCode")
+    @Column(name = "zipCode", length = 50)
     private String zipCode;
 
-    @Column(name = "phone")
+    @Column(name = "phone", length = 50)
     private String phone;
 
     @Lob
-    @Column(name = "picturePath")
+    @Column(name = "picturePath", columnDefinition="MEDIUMBLOB")
     private byte[] picturePath;
 
-    @Column(name = "title")
+    @Column(name = "title", length = 50)
     private String title;
 
-    @Column(name = "comment")
+    @Column(name = "comment", length = 1750)
     private String comment;
 
     @Column(name = "posted")

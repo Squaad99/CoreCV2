@@ -15,13 +15,13 @@ public class User {
     @Column(name = "user_id")
     private int id;
 
-    @Column(name = "email")
+    @Column(name = "email", length = 60)
     private String email;
 
-    @Column(name = "username")
+    @Column(name = "username", length = 50)
     private String username;
 
-    @Column(name = "password")
+    @Column(name = "password", length = 100)
     private String password;
 
     public User() {}
